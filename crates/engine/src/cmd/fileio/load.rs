@@ -64,6 +64,9 @@ pub fn file_name(name: &str) -> String {
 /// extension of `name`.
 pub fn detect(name: &str, bytes: &[u8]) -> Option<&'static Format> {
     let by_name = format_for_name(name).filter(|f| f.read);
+    if super::cdr::sniff(bytes) {
+        return format("cdr").filter(|f| f.read);
+    }
     if vectorcraft_affinity::is_affinity(bytes) {
         return format("affinity");
     }
@@ -243,6 +246,10 @@ pub fn load_with(name: &str, bytes: &[u8], opts: &LoadOptions) -> Result<Loaded>
         }
         "emf" | "wmf" => {
             let (doc, warnings) = super::metafile::import(bytes)?;
+            (doc, warnings, false)
+        }
+        "cdr" => {
+            let (doc, warnings) = super::cdr::import(bytes)?;
             (doc, warnings, false)
         }
         "affinity" => {

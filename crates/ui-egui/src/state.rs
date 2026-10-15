@@ -15,6 +15,9 @@ pub struct View {
     pub center: Point,
     /// False until the view was fitted to the artboard on first display.
     pub fitted: bool,
+    /// Imported CDR artwork can lie on the pasteboard: include it in the first fit.
+    #[serde(default)]
+    pub fit_all_on_open: bool,
     /// View rotation in degrees (Rotate View tool).
     pub rotation: f64,
     /// The artboard the status bar's navigator is on (an index): Fit Artboard in Window and Actual
@@ -25,7 +28,7 @@ pub struct View {
 
 impl Default for View {
     fn default() -> Self {
-        Self { zoom: 1.0, center: Point::new(306.0, 396.0), fitted: false, rotation: 0.0, artboard: 0 }
+        Self { zoom: 1.0, center: Point::new(306.0, 396.0), fitted: false, fit_all_on_open: false, rotation: 0.0, artboard: 0 }
     }
 }
 
@@ -34,9 +37,10 @@ impl View {
     pub fn of(st: &vectorcraft_engine::DocState) -> Self {
         match &st.view {
             Some(v) if v.zoom.is_finite() && v.zoom > 0.0 && v.center.x.is_finite() && v.center.y.is_finite() => Self {
-                zoom: v.zoom.clamp(0.0313, 640.0),
+                zoom: v.zoom.clamp(0.0001, 640.0),
                 center: v.center,
                 fitted: true,
+                fit_all_on_open: false,
                 rotation: if v.rotation.is_finite() { v.rotation } else { 0.0 },
                 artboard: 0,
             },
@@ -52,6 +56,10 @@ pub const ZOOM_STOPS: [f64; 26] = [
 ];
 
 pub fn next_zoom(z: f64, up: bool) -> f64 {
+    // A fit can be below the first preset: keep Zoom Out moving away from the artwork.
+    if z < 0.0313 {
+        return if up { (z * 2.0).clamp(0.0001, 0.0313) } else { (z * 0.5).max(0.0001) };
+    }
     let pct = z * 100.0;
     let stop = if up {
         ZOOM_STOPS.iter().find(|s| **s > pct + 0.01).copied().unwrap_or(64000.0)

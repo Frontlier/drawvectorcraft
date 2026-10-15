@@ -216,11 +216,12 @@ fn load(p: &Value, cmd: &str, board: Option<Rect>) -> Result<Loaded> {
     doc.drop_edit_modes();
     let board = doc.artboards.first().map(|a| a.rect).filter(|_| anchored);
     let layers = std::mem::take(&mut doc.layers);
-    let (nodes, clip) = if matches!(format.id, "svg" | "svgz" | "dxf") {
+    let (nodes, clip) = if matches!(format.id, "svg" | "svgz" | "dxf" | "cdr") {
         // An SVG with `crop: "crop"` asked for is framed and clipped by its viewBox (its artboard),
         // as a PDF by its page: art drawn on a shared canvas keeps its place and scale (#788). By
         // default, as Illustrator places one, it is its art's bounds.
-        let framed = matches!(format.id, "svg" | "svgz") && crop && p.get("crop").is_some();
+        // CDR drawings commonly keep the editable art outside their paper page too.
+        let framed = matches!(format.id, "svg" | "svgz" | "cdr") && crop && p.get("crop").is_some();
         let frame = doc.artboards.first().map(|a| a.rect).filter(|_| framed);
         (art_of(layers.iter().filter(|l| placeable(l)).flat_map(|l| l.children().into_iter().flatten())), frame)
     } else {

@@ -4808,3 +4808,16 @@ mark-style	Japanese	Japonské
 	Softness	Měkkost
 	Ambient Light	Okolní světlo
 	Light behind the object	Světlo za objektem
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	Převodník CDR nemohl přečíst dokument ({status}): {_1}
+@msg	CDR converter exceeded its output limit	Převodník CDR překročil limit výstupu
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	Převodník CDR není nainstalován. Ve Windows spusťte packaging/windows/Install-CdrRuntime.ps1 pro toto sestavení; v ostatních desktopových systémech nastavte VECTORCRAFT_CDR_CONVERTER na absolutní cestu ke spustitelnému souboru cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	Převodník CDR vrátil prázdné nebo příliš velké SVG
+@msg	CDR converter timed out; the document was not opened	Vypršel časový limit převodníku CDR; dokument nebyl otevřen
+@msg	CDR import requires the desktop application and its local CDR converter	Import CDR vyžaduje desktopovou aplikaci a její místní převodník CDR
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER musí obsahovat absolutní cestu k existujícímu spustitelnému souboru cdr2svg
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Neplatný nebo nepodporovaný kontejner CDR (maximální vstup: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	Kontejner CDR RIFF je zkrácený nebo neobsahuje záznamy kresby
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR byl importován jako upravitelné objekty. Písma, barevné profily a nepodporované efekty se mohou lišit. Uložte novou kopii ve formátu .vectorcraft, SVG nebo PDF; zápis CDR není podporován.
+@msg	CDR import: {e}	Import CDR: {e}

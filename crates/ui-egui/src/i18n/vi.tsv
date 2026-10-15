@@ -4362,3 +4362,16 @@ theme	Appearance	Giao diện
 	Softness	Độ mềm
 	Ambient Light	Ánh sáng môi trường
 	Light behind the object	Ánh sáng phía sau đối tượng
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	Trình chuyển đổi CDR không thể đọc tài liệu ({status}): {_1}
+@msg	CDR converter exceeded its output limit	Trình chuyển đổi CDR đã vượt giới hạn đầu ra
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	Chưa cài trình chuyển đổi CDR. Trên Windows, chạy packaging/windows/Install-CdrRuntime.ps1 cho bản dựng này; trên các hệ thống máy tính khác, đặt VECTORCRAFT_CDR_CONVERTER thành đường dẫn tuyệt đối đến tệp thực thi cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	Trình chuyển đổi CDR trả về SVG trống hoặc quá lớn
+@msg	CDR converter timed out; the document was not opened	Trình chuyển đổi CDR đã hết thời gian chờ; tài liệu chưa được mở
+@msg	CDR import requires the desktop application and its local CDR converter	Nhập CDR cần ứng dụng máy tính và trình chuyển đổi CDR cục bộ
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER phải chỉ định đường dẫn tuyệt đối đến tệp thực thi cdr2svg hiện có
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Vùng chứa CDR không hợp lệ hoặc không được hỗ trợ (đầu vào tối đa: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	Vùng chứa CDR RIFF bị cắt ngắn hoặc không có bản ghi bản vẽ
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR đã được nhập dưới dạng các đối tượng có thể chỉnh sửa. Phông chữ, cấu hình màu và hiệu ứng không được hỗ trợ có thể khác. Hãy lưu bản sao .vectorcraft, SVG hoặc PDF mới; không hỗ trợ ghi CDR.
+@msg	CDR import: {e}	Nhập CDR: {e}

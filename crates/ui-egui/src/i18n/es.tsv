@@ -4749,3 +4749,16 @@ mark-style	Japanese	Japonesas
 	Softness	Suavidad
 	Ambient Light	Luz ambiental
 	Light behind the object	Luz detrás del objeto
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	El conversor CDR no pudo leer el documento ({status}): {_1}
+@msg	CDR converter exceeded its output limit	El conversor CDR superó su límite de salida
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	El conversor CDR no está instalado. En Windows ejecute packaging/windows/Install-CdrRuntime.ps1 para esta compilación; en otros sistemas de escritorio establezca VECTORCRAFT_CDR_CONVERTER en la ruta absoluta del ejecutable cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	El conversor CDR devolvió un SVG vacío o demasiado grande
+@msg	CDR converter timed out; the document was not opened	Se agotó el tiempo del conversor CDR; el documento no se abrió
+@msg	CDR import requires the desktop application and its local CDR converter	La importación CDR requiere la aplicación de escritorio y su conversor CDR local
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER debe indicar la ruta absoluta de un ejecutable cdr2svg existente
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Contenedor CDR no válido o no compatible (entrada máxima: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	El contenedor CDR RIFF está truncado o no contiene registros de dibujo
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	El CDR se importó como objetos editables. Las fuentes, los perfiles de color y los efectos no compatibles pueden variar. Guarde una copia nueva en .vectorcraft, SVG o PDF; no se admite escribir CDR.
+@msg	CDR import: {e}	Importación CDR: {e}

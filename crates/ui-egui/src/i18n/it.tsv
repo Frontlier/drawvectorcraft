@@ -4380,3 +4380,16 @@ lighting	Light	Luce
 	Softness	Morbidezza
 	Ambient Light	Luce ambientale
 	Light behind the object	Luce dietro l'oggetto
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	Il convertitore CDR non ha potuto leggere il documento ({status}): {_1}
+@msg	CDR converter exceeded its output limit	Il convertitore CDR ha superato il limite di output
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	Il convertitore CDR non è installato. Su Windows eseguire packaging/windows/Install-CdrRuntime.ps1 per questa build; sugli altri sistemi desktop impostare VECTORCRAFT_CDR_CONVERTER sul percorso assoluto dell’eseguibile cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	Il convertitore CDR ha restituito un SVG vuoto o troppo grande
+@msg	CDR converter timed out; the document was not opened	Il convertitore CDR ha superato il tempo limite; il documento non è stato aperto
+@msg	CDR import requires the desktop application and its local CDR converter	L’importazione CDR richiede l’applicazione desktop e il suo convertitore CDR locale
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER deve indicare il percorso assoluto di un eseguibile cdr2svg esistente
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Contenitore CDR non valido o non supportato (input massimo: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	Il contenitore CDR RIFF è troncato o non contiene record di disegno
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	Il CDR è stato importato come oggetti modificabili. Font, profili colore ed effetti non supportati possono differire. Salvare una nuova copia .vectorcraft, SVG o PDF; la scrittura CDR non è supportata.
+@msg	CDR import: {e}	Importazione CDR: {e}

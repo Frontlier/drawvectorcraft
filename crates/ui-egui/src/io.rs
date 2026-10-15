@@ -133,6 +133,12 @@ pub fn open_document(app: &mut VectorcraftApp, name: &str, bytes: &[u8], path: O
 /// what didn't come in as it was, and missing links are asked about.
 pub(crate) fn opened(app: &mut VectorcraftApp, r: &Value) {
     app.sync_views();
+    if r["format"] == "cdr"
+        && let Some(v) = app.view_mut()
+    {
+        v.fit_all_on_open = true;
+        v.fitted = false;
+    }
     if let Some(w) = r["warnings"].as_array().filter(|w| !w.is_empty()) {
         app.status(format!("Opened with {} note(s): {}", w.len(), w[0].as_str().unwrap_or_default()));
     }
@@ -1053,5 +1059,39 @@ mod tests {
         let png = vectorcraft_format::base64_decode(r["result"]["dataBase64"].as_str().unwrap()).unwrap();
         assert_eq!(&png[16..20], 60u32.to_be_bytes(), "30 pt at scale 2");
         assert!(written.borrow().is_empty(), "no file and no save dialog");
+    }
+}
+
+#[cfg(test)]
+mod cdr_view_tests {
+    use super::*;
+    use crate::Services;
+
+    #[test]
+    fn cdr_first_view_includes_pasteboard_art_even_when_opened_from_home() {
+        let mut app = VectorcraftApp::new(vectorcraft_engine::Session::new(), Services::default());
+        app.session.execute("file.new", &json!({"width": 100, "height": 80})).unwrap();
+        app.session.execute("shape.rectangle", &json!({"x": 150000, "y": -200000, "width": 200, "height": 150})).unwrap();
+        opened(&mut app, &json!({"format": "cdr", "warnings": []}));
+        crate::canvas::fit_initial(&mut app);
+        assert!(app.view().unwrap().fit_all_on_open, "wait for the canvas on Home");
+        app.canvas_rect = Some(egui::Rect::from_min_size(egui::Pos2::ZERO, egui::vec2(1000.0, 700.0)));
+        crate::canvas::fit_initial(&mut app);
+        let view = app.view().unwrap();
+        assert!(view.fitted && !view.fit_all_on_open);
+        assert!(view.center.x > 500.0 && view.center.y < -500.0);
+        assert!(view.zoom < 0.01, "large pasteboards must fit below the first zoom preset");
+        let (center, zoom) = (view.center, view.zoom);
+        app.session.doc_mut().unwrap().view = Some(vectorcraft_doc::SavedView { name: String::new(), center, zoom, rotation: 0.0 });
+        assert_eq!(crate::state::View::of(app.session.doc().unwrap()).zoom, zoom);
+        app.run("view.zoomOut", json!({})).unwrap();
+        assert!(app.view().unwrap().zoom < zoom, "Zoom Out must not jump towards large artwork");
+        app.run("view.setZoom", json!({"zoom": zoom * 100.0, "center": [center.x, center.y]})).unwrap();
+        assert!((app.view().unwrap().zoom - zoom).abs() < 1e-12);
+        crate::canvas::fit_initial(&mut app);
+        assert_eq!(app.view().unwrap().center, center);
+        app.run("file.new", json!({"width": 100, "height": 80})).unwrap();
+        crate::canvas::fit_initial(&mut app);
+        assert_eq!(app.view().unwrap().center, vectorcraft_geom::Point::new(50.0, 40.0));
     }
 }

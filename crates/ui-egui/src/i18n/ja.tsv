@@ -4374,3 +4374,16 @@ lighting	Light	ライト
 	Softness	柔らかさ
 	Ambient Light	環境光
 	Light behind the object	オブジェクトの背後のライト
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	CDR コンバーターはドキュメントを読み取れませんでした（{status}）: {_1}
+@msg	CDR converter exceeded its output limit	CDR コンバーターの出力が上限を超えました
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	CDR コンバーターがインストールされていません。Windows ではこのビルド用に packaging/windows/Install-CdrRuntime.ps1 を実行してください。その他のデスクトップ環境では VECTORCRAFT_CDR_CONVERTER に cdr2svg 実行ファイルの絶対パスを設定してください。
+@msg	CDR converter returned empty or oversized SVG	CDR コンバーターが空または大きすぎる SVG を返しました
+@msg	CDR converter timed out; the document was not opened	CDR コンバーターがタイムアウトしたため、ドキュメントは開かれませんでした
+@msg	CDR import requires the desktop application and its local CDR converter	CDR の読み込みにはデスクトップアプリとローカルの CDR コンバーターが必要です
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER には存在する cdr2svg 実行ファイルの絶対パスを指定してください
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	無効または未対応の CDR コンテナーです（入力の上限: 128 MiB）
+@msg	CDR RIFF container is truncated or contains no drawing records	CDR RIFF コンテナーが途中で切れているか、描画レコードがありません
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR を編集可能なオブジェクトとして読み込みました。フォント、カラープロファイル、未対応の効果は異なる場合があります。.vectorcraft、SVG、PDF の新しいコピーを保存してください。CDR の書き込みには対応していません。
+@msg	CDR import: {e}	CDR の読み込み: {e}

@@ -3763,3 +3763,16 @@ axis	Both	Ambos
 	Softness	Suavidade
 	Ambient Light	Luz ambiente
 	Light behind the object	Luz atrás do objeto
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	O conversor CDR não conseguiu ler o documento ({status}): {_1}
+@msg	CDR converter exceeded its output limit	O conversor CDR excedeu o limite de saída
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	O conversor CDR não está instalado. No Windows, execute packaging/windows/Install-CdrRuntime.ps1 para esta compilação; em outros sistemas de computador, defina VECTORCRAFT_CDR_CONVERTER com o caminho absoluto do executável cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	O conversor CDR retornou um SVG vazio ou grande demais
+@msg	CDR converter timed out; the document was not opened	O conversor CDR excedeu o tempo limite; o documento não foi aberto
+@msg	CDR import requires the desktop application and its local CDR converter	A importação CDR requer o aplicativo para computador e seu conversor CDR local
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER deve indicar o caminho absoluto de um executável cdr2svg existente
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Contêiner CDR inválido ou não compatível (entrada máxima: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	O contêiner CDR RIFF está truncado ou não contém registros de desenho
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR importado como objetos editáveis. Fontes, perfis de cor e efeitos não compatíveis podem apresentar diferenças. Salve uma nova cópia .vectorcraft, SVG ou PDF; o salvamento em CDR não é compatível.
+@msg	CDR import: {e}	Importação CDR: {e}

@@ -360,3 +360,7 @@ Forks and modified versions must remove them.
   <a href="https://getartcraft.com/"><img alt="ArtCraft" src="docs/brand/artcraft-mark.svg" width="28"></a><br>
   <sub>Made by the <a href="https://getartcraft.com/">ArtCraft</a> team and community.</sub>
 </p>
+
+### Desktop CDR import
+
+Windows builds can open and place CDR files as editable paths, text and images with the pinned local converter. After building, run `packaging/windows/Install-CdrRuntime.ps1`. Save a new native, SVG or PDF copy; writing CDR is not supported. See [setup and fidelity limits](docs/cdr-import.md).

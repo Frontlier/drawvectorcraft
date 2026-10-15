@@ -3741,3 +3741,16 @@ lighting	Light	光源
 	Softness	柔和度
 	Ambient Light	環境光
 	Light behind the object	光源位於物件後方
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	CDR 轉換器無法讀取文件（{status}）：{_1}
+@msg	CDR converter exceeded its output limit	CDR 轉換器超出輸出大小限制
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	尚未安裝 CDR 轉換器。在 Windows 上，請為此建置執行 packaging/windows/Install-CdrRuntime.ps1；在其他桌面系統上，請將 VECTORCRAFT_CDR_CONVERTER 設為 cdr2svg 執行檔的絕對路徑。
+@msg	CDR converter returned empty or oversized SVG	CDR 轉換器傳回空白或過大的 SVG
+@msg	CDR converter timed out; the document was not opened	CDR 轉換器逾時；文件未開啟
+@msg	CDR import requires the desktop application and its local CDR converter	匯入 CDR 需要桌面應用程式及其本機 CDR 轉換器
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER 必須指定現有 cdr2svg 執行檔的絕對路徑
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	無效或不支援的 CDR 容器（輸入上限：128 MiB）
+@msg	CDR RIFF container is truncated or contains no drawing records	CDR RIFF 容器已截斷或不含繪圖記錄
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR 已匯入為可編輯物件。字型、色彩描述檔與不支援的效果可能有所差異。請儲存新的 .vectorcraft、SVG 或 PDF 副本；不支援寫入 CDR。
+@msg	CDR import: {e}	CDR 匯入：{e}

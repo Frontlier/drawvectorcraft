@@ -1145,7 +1145,7 @@ pub fn run_ui_command(app: &mut VectorcraftApp, id: &str, p: &Value) -> Option<R
                 p.get("center").and_then(Value::as_array).and_then(|a| Some(vectorcraft_geom::Point::new(a.first()?.as_f64()?, a.get(1)?.as_f64()?)));
             match app.view_mut() {
                 Some(v) => {
-                    v.zoom = z.clamp(0.0313, 640.0);
+                    v.zoom = z.clamp(0.0001, 640.0);
                     v.fitted = true;
                     if let Some(c) = center {
                         v.center = c;

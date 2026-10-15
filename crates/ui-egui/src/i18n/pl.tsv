@@ -4651,3 +4651,16 @@ mark-style	Japanese	Japońskie
 	Softness	Miękkość
 	Ambient Light	Światło otoczenia
 	Light behind the object	Światło za obiektem
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	Konwerter CDR nie mógł odczytać dokumentu ({status}): {_1}
+@msg	CDR converter exceeded its output limit	Konwerter CDR przekroczył limit danych wyjściowych
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	Konwerter CDR nie jest zainstalowany. W systemie Windows uruchom packaging/windows/Install-CdrRuntime.ps1 dla tej kompilacji; w innych systemach komputerowych ustaw VECTORCRAFT_CDR_CONVERTER na bezwzględną ścieżkę do pliku wykonywalnego cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	Konwerter CDR zwrócił pusty lub zbyt duży plik SVG
+@msg	CDR converter timed out; the document was not opened	Upłynął limit czasu konwertera CDR; dokument nie został otwarty
+@msg	CDR import requires the desktop application and its local CDR converter	Import CDR wymaga aplikacji komputerowej i lokalnego konwertera CDR
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER musi wskazywać bezwzględną ścieżkę do istniejącego pliku wykonywalnego cdr2svg
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Nieprawidłowy lub nieobsługiwany kontener CDR (maksymalny rozmiar wejściowy: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	Kontener CDR RIFF jest obcięty lub nie zawiera rekordów rysunku
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR zaimportowano jako edytowalne obiekty. Czcionki, profile kolorów i nieobsługiwane efekty mogą się różnić. Zapisz nową kopię .vectorcraft, SVG lub PDF; zapis CDR nie jest obsługiwany.
+@msg	CDR import: {e}	Import CDR: {e}

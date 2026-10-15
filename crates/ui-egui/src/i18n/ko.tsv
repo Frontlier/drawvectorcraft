@@ -4344,3 +4344,16 @@ lighting	Light	광원
 	Softness	부드러움
 	Ambient Light	주변광
 	Light behind the object	개체 뒤의 조명
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	CDR 변환기가 문서를 읽지 못했습니다 ({status}): {_1}
+@msg	CDR converter exceeded its output limit	CDR 변환기가 출력 크기 제한을 초과했습니다
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	CDR 변환기가 설치되지 않았습니다. Windows에서는 이 빌드용 packaging/windows/Install-CdrRuntime.ps1을 실행하세요. 다른 데스크톱 시스템에서는 VECTORCRAFT_CDR_CONVERTER에 cdr2svg 실행 파일의 절대 경로를 설정하세요.
+@msg	CDR converter returned empty or oversized SVG	CDR 변환기가 비어 있거나 너무 큰 SVG를 반환했습니다
+@msg	CDR converter timed out; the document was not opened	CDR 변환 시간이 초과되어 문서가 열리지 않았습니다
+@msg	CDR import requires the desktop application and its local CDR converter	CDR 가져오기에는 데스크톱 앱과 로컬 CDR 변환기가 필요합니다
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER에는 존재하는 cdr2svg 실행 파일의 절대 경로를 지정해야 합니다
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	유효하지 않거나 지원되지 않는 CDR 컨테이너입니다 (최대 입력: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	CDR RIFF 컨테이너가 잘렸거나 그리기 레코드가 없습니다
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR을 편집 가능한 개체로 가져왔습니다. 글꼴, 색상 프로필 및 지원되지 않는 효과는 다를 수 있습니다. 새 .vectorcraft, SVG 또는 PDF 복사본을 저장하세요. CDR 쓰기는 지원되지 않습니다.
+@msg	CDR import: {e}	CDR 가져오기: {e}

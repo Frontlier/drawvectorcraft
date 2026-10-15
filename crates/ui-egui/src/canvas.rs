@@ -142,12 +142,25 @@ pub fn fit(app: &mut VectorcraftApp, how: &str) {
     } else {
         let zx = (rect.width() as f64 - 60.0) / target.width().max(1.0);
         let zy = (rect.height() as f64 - 60.0) / target.height().max(1.0);
-        zx.min(zy).clamp(0.0313, 640.0)
+        // Large imported pasteboards need less than the first 3.13% preset to fit in full.
+        zx.min(zy).clamp(0.0001, 640.0)
     };
     let Some(v) = app.view_mut() else { return };
     v.center = target.center();
     v.fitted = true;
     v.zoom = zoom;
+}
+
+/// Apply the first fit only after the canvas size is known (including opening from Home).
+pub(crate) fn fit_initial(app: &mut VectorcraftApp) {
+    if app.view().is_some_and(|v| v.fitted) {
+        return;
+    }
+    let all = app.view().is_some_and(|v| v.fit_all_on_open);
+    fit(app, if all { "view.fitAll" } else { "view.fitArtboard" });
+    if let Some(v) = app.view_mut().filter(|v| v.fitted) {
+        v.fit_all_on_open = false;
+    }
 }
 
 pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
@@ -173,10 +186,7 @@ pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
     }
     let rect = if app.ui.view.rulers && app.ui.screen_mode < 3 { egui::Rect::from_min_max(full.min + vec2(RULER, RULER), full.max) } else { full };
     app.canvas_rect = Some(rect);
-    let fitted = app.view().is_some_and(|v| v.fitted);
-    if !fitted {
-        fit(app, "view.fitArtboard");
-    }
+    fit_initial(app);
     let resp = ui.interact(rect, egui::Id::new("canvas"), Sense::click_and_drag());
     // A press on the canvas while the context menu is open only closes it (a drag too, which egui
     // alone would leave open); the tool doesn't get it.
@@ -708,7 +718,7 @@ fn handle_input(app: &mut VectorcraftApp, ui: &Ui, resp: &egui::Response, rect: 
                             let a = xf.to_doc(r.min);
                             let b = xf.to_doc(r.max);
                             vm.center = Point::new((a.x + b.x) / 2.0, (a.y + b.y) / 2.0);
-                            vm.zoom = (rect.width() as f64 / (b.x - a.x)).min(rect.height() as f64 / (b.y - a.y)).clamp(0.0313, 640.0);
+                            vm.zoom = (rect.width() as f64 / (b.x - a.x)).min(rect.height() as f64 / (b.y - a.y)).clamp(0.0001, 640.0);
                         } else {
                             zoom_about(vm, rect, p, crate::state::next_zoom(vm.zoom, !m.alt));
                         }
@@ -795,7 +805,7 @@ pub(crate) fn actual_size_zoom(display_print_size: bool) -> f64 {
 /// point under screen point `p` where it is.
 fn zoom_about(vm: &mut View, rect: egui::Rect, p: Pos2, zoom: f64) {
     let before = Xf::new(rect, vm).to_doc(p);
-    vm.zoom = zoom.clamp(0.0313, 640.0);
+    vm.zoom = zoom.clamp(0.0001, 640.0);
     vm.center += before - Xf::new(rect, vm).to_doc(p);
 }
 
@@ -4646,5 +4656,22 @@ mod tests {
         assert!(!app.ui.task_bar_place.pinned);
         near(select(&mut app, &a), under_a);
         near(select(&mut app, &b), under_b);
+    }
+}
+
+#[cfg(test)]
+mod cdr_zoom_tests {
+    use super::*;
+
+    #[test]
+    fn a_large_pasteboard_can_zoom_out_without_moving_the_pointer_anchor() {
+        let mut view = View { zoom: 0.012, ..View::default() };
+        let rect = egui::Rect::from_min_size(Pos2::ZERO, vec2(1000.0, 700.0));
+        let pointer = Pos2::new(20.0, 30.0);
+        let before = Xf::new(rect, &view).to_doc(pointer);
+        zoom_about(&mut view, rect, pointer, 0.006);
+        assert_eq!(view.zoom, 0.006);
+        let after = Xf::new(rect, &view).to_doc(pointer);
+        assert!((after.x - before.x).abs() < 1e-6 && (after.y - before.y).abs() < 1e-6);
     }
 }

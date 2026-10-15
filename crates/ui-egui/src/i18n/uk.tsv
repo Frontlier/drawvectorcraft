@@ -4360,3 +4360,16 @@ lighting	Light	Світло
 	Softness	М'якість
 	Ambient Light	Навколишнє світло
 	Light behind the object	Світло позаду об'єкта
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	Конвертер CDR не зміг прочитати документ ({status}): {_1}
+@msg	CDR converter exceeded its output limit	Конвертер CDR перевищив обмеження розміру виводу
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	Конвертер CDR не встановлено. У Windows запустіть packaging/windows/Install-CdrRuntime.ps1 для цієї збірки; в інших настільних системах задайте для VECTORCRAFT_CDR_CONVERTER абсолютний шлях до виконуваного файлу cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	Конвертер CDR повернув порожній або завеликий SVG
+@msg	CDR converter timed out; the document was not opened	Час очікування конвертера CDR минув; документ не відкрито
+@msg	CDR import requires the desktop application and its local CDR converter	Для імпорту CDR потрібні настільний застосунок і його локальний конвертер CDR
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER має містити абсолютний шлях до наявного виконуваного файлу cdr2svg
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Недійсний або непідтримуваний контейнер CDR (максимальний розмір вхідних даних: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	Контейнер CDR RIFF обрізаний або не містить записів малюнка
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR імпортовано як редаговані об’єкти. Шрифти, колірні профілі та непідтримувані ефекти можуть відрізнятися. Збережіть нову копію .vectorcraft, SVG або PDF; запис CDR не підтримується.
+@msg	CDR import: {e}	Імпорт CDR: {e}

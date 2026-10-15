@@ -4775,3 +4775,16 @@ imageTrace	Outline	Körvonal
 	Softness	Lágyság
 	Ambient Light	Környezeti fény
 	Light behind the object	Fény az objektum mögött
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	A CDR-átalakító nem tudta beolvasni a dokumentumot ({status}): {_1}
+@msg	CDR converter exceeded its output limit	A CDR-átalakító túllépte a kimeneti méretkorlátot
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	A CDR-átalakító nincs telepítve. Windows alatt futtassa a packaging/windows/Install-CdrRuntime.ps1 parancsfájlt ehhez a buildhez; más asztali rendszereken a VECTORCRAFT_CDR_CONVERTER értéke a cdr2svg program abszolút elérési útja legyen.
+@msg	CDR converter returned empty or oversized SVG	A CDR-átalakító üres vagy túl nagy SVG-t adott vissza
+@msg	CDR converter timed out; the document was not opened	A CDR-átalakító túllépte az időkorlátot; a dokumentum nem nyílt meg
+@msg	CDR import requires the desktop application and its local CDR converter	A CDR importálásához az asztali alkalmazás és a helyi CDR-átalakító szükséges
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	A VECTORCRAFT_CDR_CONVERTER értékének egy létező cdr2svg program abszolút elérési útját kell tartalmaznia
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Érvénytelen vagy nem támogatott CDR-konténer (legnagyobb bemenet: 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	A CDR RIFF konténer csonkolt, vagy nem tartalmaz rajzrekordokat
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	A CDR szerkeszthető objektumokként lett importálva. A betűtípusok, színprofilok és nem támogatott hatások eltérhetnek. Mentsen új .vectorcraft, SVG vagy PDF másolatot; a CDR írása nem támogatott.
+@msg	CDR import: {e}	CDR-importálás: {e}

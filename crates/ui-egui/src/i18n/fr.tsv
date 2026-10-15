@@ -4808,3 +4808,16 @@ theme	Appearance	Apparence
 	Softness	Douceur
 	Ambient Light	Lumière ambiante
 	Light behind the object	Lumière derrière l'objet
+
+# CDR desktop import (CDR.1).
+@msg	CDR converter could not read the document ({status}): {_1}	Le convertisseur CDR n’a pas pu lire le document ({status}) : {_1}
+@msg	CDR converter exceeded its output limit	Le convertisseur CDR a dépassé sa limite de sortie
+@msg	CDR converter is not installed. On Windows run packaging/windows/Install-CdrRuntime.ps1 for this build; on other desktop systems set VECTORCRAFT_CDR_CONVERTER to an absolute cdr2svg executable.	Le convertisseur CDR n’est pas installé. Sous Windows, exécutez packaging/windows/Install-CdrRuntime.ps1 pour cette compilation ; sur les autres systèmes de bureau, définissez VECTORCRAFT_CDR_CONVERTER sur le chemin absolu de l’exécutable cdr2svg.
+@msg	CDR converter returned empty or oversized SVG	Le convertisseur CDR a renvoyé un SVG vide ou trop volumineux
+@msg	CDR converter timed out; the document was not opened	Le délai du convertisseur CDR a expiré ; le document n’a pas été ouvert
+@msg	CDR import requires the desktop application and its local CDR converter	L’importation CDR nécessite l’application de bureau et son convertisseur CDR local
+@msg	VECTORCRAFT_CDR_CONVERTER must name an existing absolute cdr2svg executable	VECTORCRAFT_CDR_CONVERTER doit indiquer le chemin absolu d’un exécutable cdr2svg existant
+@msg	Invalid or unsupported CDR container (maximum input: 128 MiB)	Conteneur CDR non valide ou non pris en charge (entrée maximale : 128 MiB)
+@msg	CDR RIFF container is truncated or contains no drawing records	Le conteneur CDR RIFF est tronqué ou ne contient aucun enregistrement de dessin
+@msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	Le CDR a été importé sous forme d’objets modifiables. Les polices, les profils colorimétriques et les effets non pris en charge peuvent différer. Enregistrez une nouvelle copie en .vectorcraft, SVG ou PDF ; l’écriture CDR n’est pas prise en charge.
+@msg	CDR import: {e}	Importation CDR : {e}

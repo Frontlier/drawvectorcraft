@@ -3376,3 +3376,19 @@ fn a_pattern_painting_its_own_tile_opens_without_the_paint() {
         }
     });
 }
+
+// ---------- CDR containers (the native helper is isolated, bounded and optional) ----------
+proptest! {
+    #![proptest_config(config())]
+    #[test]
+    fn cdr_garbage_never_panics(bytes in prop::collection::vec(any::<u8>(), 0..2048)) {
+        survive("CDR garbage", || vectorcraft_engine::cmd::fileio::load("x.cdr", &bytes).ok().map(|l| l.doc))?;
+    }
+
+    #[test]
+    fn cdr_truncated_riff_never_panics(tail in prop::collection::vec(any::<u8>(), 0..256)) {
+        let mut bytes = b"RIFF\x04\0\0\0CDRG".to_vec();
+        bytes.extend(tail);
+        survive("CDR damaged RIFF", || vectorcraft_engine::cmd::fileio::load("x.cdr", &bytes).ok().map(|l| l.doc))?;
+    }
+}
