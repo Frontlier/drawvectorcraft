@@ -4375,3 +4375,24 @@ theme	Appearance	Giao diện
 @msg	CDR RIFF container is truncated or contains no drawing records	Vùng chứa CDR RIFF bị cắt ngắn hoặc không có bản ghi bản vẽ
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR đã được nhập dưới dạng các đối tượng có thể chỉnh sửa. Phông chữ, cấu hình màu và hiệu ứng không được hỗ trợ có thể khác. Hãy lưu bản sao .vectorcraft, SVG hoặc PDF mới; không hỗ trợ ghi CDR.
 @msg	CDR import: {e}	Nhập CDR: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	Đặt vào khung
+	Finish Editing	Hoàn tất chỉnh sửa
+	Select Frame	Chọn khung
+	Select Contents	Chọn nội dung
+	Extract Contents	Tách nội dung
+	Lock Contents	Khóa nội dung
+	Fit Contents	Khớp nội dung
+	Center Contents	Căn giữa nội dung
+	Fit Contents Proportionally	Khớp nội dung theo tỷ lệ
+	Fill Frame Proportionally	Lấp đầy khung theo tỷ lệ
+	Stretch Contents to Frame	Kéo giãn nội dung theo khung
+@msg	select a PowerClip frame or its contents	Chọn khung PowerClip hoặc nội dung của khung
+@msg	no PowerClip contents are being edited	Không có nội dung PowerClip nào đang được chỉnh sửa
+@msg	select a frame; put it above the contents	Chọn một khung và đặt lên trên nội dung
+@msg	the PowerClip frame has no contents to fit	Khung PowerClip không có nội dung để khớp
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	Hỗ trợ PowerClip trong CDR cần bộ chuyển đổi CDR VectorCraft đã cập nhật
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	Không thể nhập khung PowerClip trong CDR thành hình cắt có thể chỉnh sửa
+@msg	the CorelDRAW document has no page with a size	tài liệu CorelDRAW không có trang nào có kích thước

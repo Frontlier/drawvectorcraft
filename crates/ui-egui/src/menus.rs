@@ -1533,6 +1533,10 @@ pub fn checked(app: &VectorcraftApp, id: &str, p: &Value) -> Option<bool> {
         })
     };
     Some(match id {
+        "object.powerClip.lockContents" => vectorcraft_engine::cmd::powerclip::selected(&app.session)
+            .and_then(|id| app.session.active()?.doc.node(id))
+            .and_then(|n| n.extras().powerclip)
+            .is_some_and(|spec| spec.contents_locked),
         "type.orientation.vertical" | "type.orientation.horizontal" => {
             selected_text(false).is_some_and(|t| t.vertical == (id == "type.orientation.vertical"))
         }
@@ -2385,6 +2389,7 @@ pub fn menu_tree_named(english_names: bool) -> Vec<(&'static str, Vec<Item>)> {
                         c("Edit Clipping Path", "object.clippingMask.editMask"),
                     ],
                 ),
+                sub("PowerClip", powerclip_items()),
                 sub("Compound Path", vec![c("Make", "object.compoundPath.make"), c("Release", "object.compoundPath.release")]),
                 sub(
                     "Artboards",
@@ -2749,6 +2754,25 @@ fn arrange_items() -> Vec<Item> {
     ]
 }
 
+fn powerclip_items() -> Vec<Item> {
+    use Item::Sep;
+    vec![
+        c("Place Inside Frame", "object.powerClip.make"),
+        c("Edit Contents", "object.powerClip.edit"),
+        c("Finish Editing", "object.powerClip.finish"),
+        c("Select Frame", "object.powerClip.selectFrame"),
+        c("Select Contents", "object.powerClip.selectContents"),
+        c("Extract Contents", "object.powerClip.extract"),
+        Sep,
+        c("Lock Contents", "object.powerClip.lockContents"),
+        Sep,
+        cp("Center Contents", "object.powerClip.fit", json!({"mode":"center"})),
+        cp("Fit Contents Proportionally", "object.powerClip.fit", json!({"mode":"fit"})),
+        cp("Fill Frame Proportionally", "object.powerClip.fit", json!({"mode":"fill"})),
+        cp("Stretch Contents to Frame", "object.powerClip.fit", json!({"mode":"stretch"})),
+    ]
+}
+
 /// The canvas context menu (right-click): what applies to the selection, or to the view when
 /// nothing is selected. Commands that can't run now are left out rather than greyed out.
 pub fn context_items(app: &VectorcraftApp) -> Vec<Item> {
@@ -2760,6 +2784,9 @@ pub fn context_items(app: &VectorcraftApp) -> Vec<Item> {
     let mut v = vec![c("Undo", "edit.undo"), c("Redo", "edit.redo"), Sep];
     if st.isolation.is_some() {
         v.extend([c("Exit Isolation Mode", "object.exitIsolation"), Sep]);
+    }
+    if vectorcraft_engine::cmd::powerclip::selected(&app.session).is_some() {
+        v.extend([sub("PowerClip", powerclip_items()), Sep]);
     }
     if roots.is_empty() {
         v.extend([
@@ -2798,6 +2825,9 @@ pub fn context_items(app: &VectorcraftApp) -> Vec<Item> {
         }
         if several {
             v.push(c("Make Clipping Mask", "object.clippingMask.make"));
+        }
+        if vectorcraft_engine::cmd::powerclip::selected(&app.session).is_none() && enabled(app, "object.powerClip.make") {
+            v.push(sub("PowerClip", powerclip_items()));
         }
         if any(|k| matches!(k, NodeKind::Group { clip: true, .. })) {
             v.push(c("Release Clipping Mask", "object.clippingMask.release"));

@@ -22,10 +22,15 @@ pub struct Loaded {
     /// An older native file (the former `.drawcraft` name or format version): saving it again
     /// rewrites it in today's format.
     pub converted: bool,
-    /// Only a stand-in picture of the file (an Affinity document whose native data couldn't be
-    /// read): Open shows it with its warning; Place, templates and libraries refuse it.
+    /// Only a stand-in picture of the file (an Affinity or CorelDRAW document whose native data
+    /// couldn't be read): Open shows it with its warning; Place, templates and libraries refuse it
+    /// ([`PREVIEW_ONLY`]).
     pub preview_only: bool,
 }
+
+/// Why Place, File › New from Template and the swatch and graphic style libraries refuse a file
+/// that opened only as its embedded preview ([`Loaded::preview_only`]).
+pub const PREVIEW_ONLY: &str = "only this file's embedded preview could be read: use File › Open to see it with its warning, or export SVG or PDF from the app that made it first";
 
 impl Loaded {
     /// The file with the grid of Preferences › Guides & Grid, unless it is a native document (also
@@ -64,8 +69,10 @@ pub fn file_name(name: &str) -> String {
 /// extension of `name`.
 pub fn detect(name: &str, bytes: &[u8]) -> Option<&'static Format> {
     let by_name = format_for_name(name).filter(|f| f.read);
-    if super::cdr::sniff(bytes) {
-        return format("cdr").filter(|f| f.read);
+    // CorelDRAW: its ZIP's first entry or its RIFF form type, or a ZIP naming a drawing stream
+    // (never any other ZIP); before the image sniff, which knows RIFF.
+    if vectorcraft_cdr::is_cdr(bytes) || super::cdr::sniff(bytes) {
+        return format("cdr");
     }
     if vectorcraft_affinity::is_affinity(bytes) {
         return format("affinity");
@@ -249,8 +256,9 @@ pub fn load_with(name: &str, bytes: &[u8], opts: &LoadOptions) -> Result<Loaded>
             (doc, warnings, false)
         }
         "cdr" => {
-            let (doc, warnings) = super::cdr::import(bytes)?;
-            (doc, warnings, false)
+            let i = super::cdr::import(&title, bytes, opts.cdr_converter)?;
+            preview_only = i.preview_only;
+            (i.doc, i.warnings, false)
         }
         "affinity" => {
             let i = super::affinity::import(&title, bytes)?;
@@ -352,9 +360,7 @@ pub fn open_read(s: &mut Session, file: ReadFile) -> Result<Value> {
 pub fn open_template(s: &mut Session, name: &str, bytes: &[u8], path: Option<&str>) -> Result<Value> {
     let mut loaded = load(name, bytes)?;
     if loaded.preview_only {
-        return Err(err(
-            "only this Affinity file's embedded preview could be read: use File › Open to see it with its warning, or export SVG or PDF from Affinity first",
-        ));
+        return Err(err(PREVIEW_ONLY));
     }
     let links = crate::cmd::links::resolve(&mut loaded.doc, path, s.prefs.update_links == "automatically");
     open_loaded(s, loaded, links, path.map(str::to_string), &LoadOptions::default(), true)

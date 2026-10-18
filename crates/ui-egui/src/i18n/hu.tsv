@@ -4788,3 +4788,24 @@ imageTrace	Outline	Körvonal
 @msg	CDR RIFF container is truncated or contains no drawing records	A CDR RIFF konténer csonkolt, vagy nem tartalmaz rajzrekordokat
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	A CDR szerkeszthető objektumokként lett importálva. A betűtípusok, színprofilok és nem támogatott hatások eltérhetnek. Mentsen új .vectorcraft, SVG vagy PDF másolatot; a CDR írása nem támogatott.
 @msg	CDR import: {e}	CDR-importálás: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	Elhelyezés keretben
+	Finish Editing	Szerkesztés befejezése
+	Select Frame	Keret kijelölése
+	Select Contents	Tartalom kijelölése
+	Extract Contents	Tartalom kiemelése
+	Lock Contents	Tartalom zárolása
+	Fit Contents	Tartalom illesztése
+	Center Contents	Tartalom középre igazítása
+	Fit Contents Proportionally	Tartalom arányos illesztése
+	Fill Frame Proportionally	Keret arányos kitöltése
+	Stretch Contents to Frame	Tartalom nyújtása a kerethez
+@msg	select a PowerClip frame or its contents	Jelöljön ki egy PowerClip-keretet vagy annak tartalmát
+@msg	no PowerClip contents are being edited	Nincs szerkesztés alatt álló PowerClip-tartalom
+@msg	select a frame; put it above the contents	Jelöljön ki egy keretet, és helyezze a tartalom fölé
+@msg	the PowerClip frame has no contents to fit	A PowerClip-keret nem tartalmaz illeszthető tartalmat
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	A CDR PowerClip támogatásához a frissített VectorCraft CDR-átalakító szükséges
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	A CDR PowerClip-kerete nem importálható szerkeszthető vágóalakként
+@msg	the CorelDRAW document has no page with a size	a CorelDRAW-dokumentumnak nincs méretezett oldala

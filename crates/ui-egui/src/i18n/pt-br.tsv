@@ -3776,3 +3776,40 @@ axis	Both	Ambos
 @msg	CDR RIFF container is truncated or contains no drawing records	O contêiner CDR RIFF está truncado ou não contém registros de desenho
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR importado como objetos editáveis. Fontes, perfis de cor e efeitos não compatíveis podem apresentar diferenças. Salve uma nova cópia .vectorcraft, SVG ou PDF; o salvamento em CDR não é compatível.
 @msg	CDR import: {e}	Importação CDR: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	Colocar dentro da moldura
+	Finish Editing	Concluir edição
+	Select Frame	Selecionar moldura
+	Select Contents	Selecionar conteúdo
+	Extract Contents	Extrair conteúdo
+	Lock Contents	Bloquear conteúdo
+	Fit Contents	Ajustar conteúdo
+	Center Contents	Centralizar conteúdo
+	Fit Contents Proportionally	Encaixar conteúdo proporcionalmente
+	Fill Frame Proportionally	Preencher moldura proporcionalmente
+	Stretch Contents to Frame	Esticar conteúdo à moldura
+@msg	select a PowerClip frame or its contents	Selecione uma moldura PowerClip ou seu conteúdo
+@msg	no PowerClip contents are being edited	Nenhum conteúdo PowerClip está sendo editado
+@msg	select a frame; put it above the contents	Selecione uma moldura e coloque-a acima do conteúdo
+@msg	the PowerClip frame has no contents to fit	A moldura PowerClip não tem conteúdo para ajustar
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	Para usar PowerClip em CDR, atualize o conversor CDR do VectorCraft
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	Não foi possível importar a moldura PowerClip do CDR como recorte editável
+@msg	the PowerClip frame is locked or hidden	A moldura PowerClip está bloqueada ou oculta
+@msg	the PowerClip has no clipping frame	O PowerClip não tem uma moldura de recorte
+@msg	a PowerClip accepts at most 10000 objects per operation	Um PowerClip aceita no máximo 10000 objetos por operação
+@msg	PowerClip object ids must be distinct	Os identificadores de objetos PowerClip devem ser diferentes
+@msg	the PowerClip frame must be a path, compound path or text	A moldura PowerClip deve ser um caminho, caminho composto ou texto
+@msg	the PowerClip has no valid clipping frame	O PowerClip não tem uma moldura de recorte válida
+@msg	PowerClip objects must be visible and unlocked	Os objetos PowerClip devem estar visíveis e desbloqueados
+@msg	a layer cannot be PowerClip contents	Uma camada não pode ser conteúdo PowerClip
+@msg	a PowerClip cannot contain its own frame or an ancestor	Um PowerClip não pode conter sua própria moldura nem um objeto ancestral
+@msg	center must be true or false	O parâmetro center deve ser verdadeiro ou falso
+@msg	locked must be true or false	O parâmetro locked deve ser verdadeiro ou falso
+@msg	mode must be center, fit, fill or stretch	O modo deve ser center, fit, fill ou stretch
+@msg	the PowerClip frame has no usable bounds	A moldura PowerClip não tem limites utilizáveis
+@msg	the PowerClip contents have no usable bounds	O conteúdo PowerClip não tem limites utilizáveis
+@msg	the PowerClip frame and contents must have nonzero finite bounds	A moldura e o conteúdo PowerClip devem ter dimensões finitas e maiores que zero
+@msg	the PowerClip fit transform is outside the supported coordinate range	O ajuste do PowerClip excede o intervalo de coordenadas permitido
+@msg	the CorelDRAW document has no page with a size	o documento do CorelDRAW não tem nenhuma página com tamanho

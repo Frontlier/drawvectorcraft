@@ -4373,3 +4373,24 @@ lighting	Light	Світло
 @msg	CDR RIFF container is truncated or contains no drawing records	Контейнер CDR RIFF обрізаний або не містить записів малюнка
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR імпортовано як редаговані об’єкти. Шрифти, колірні профілі та непідтримувані ефекти можуть відрізнятися. Збережіть нову копію .vectorcraft, SVG або PDF; запис CDR не підтримується.
 @msg	CDR import: {e}	Імпорт CDR: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	Розмістити в рамці
+	Finish Editing	Завершити редагування
+	Select Frame	Вибрати рамку
+	Select Contents	Вибрати вміст
+	Extract Contents	Витягти вміст
+	Lock Contents	Закріпити вміст
+	Fit Contents	Припасувати вміст
+	Center Contents	Центрувати вміст
+	Fit Contents Proportionally	Пропорційно вписати вміст
+	Fill Frame Proportionally	Пропорційно заповнити рамку
+	Stretch Contents to Frame	Розтягнути вміст до рамки
+@msg	select a PowerClip frame or its contents	Виберіть рамку PowerClip або її вміст
+@msg	no PowerClip contents are being edited	Вміст PowerClip зараз не редагується
+@msg	select a frame; put it above the contents	Виберіть рамку та розмістіть її над вмістом
+@msg	the PowerClip frame has no contents to fit	Рамка PowerClip не має вмісту для припасування
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	Підтримка PowerClip у CDR потребує оновленого конвертера CDR VectorCraft
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	Не вдалося імпортувати рамку PowerClip із CDR як редаговану форму відсікання
+@msg	the CorelDRAW document has no page with a size	у документі CorelDRAW немає сторінки з розміром

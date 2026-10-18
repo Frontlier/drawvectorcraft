@@ -601,7 +601,20 @@ impl Renderer {
 
     /// Render `doc` into a `width`×`height` image using `view` (document → pixel transform).
     pub fn render(&mut self, doc: &Document, width: u32, height: u32, view: Affine, opts: &RenderOptions) -> Rendered {
-        self.render_as(doc, width, height, view, opts, false)
+        // Edit Contents is a display-only projection. Opening the one edited frame in a cheap
+        // copy also updates every ancestor's cull/effect bounds, so contents remain visible when
+        // their frame is offscreen. The real document always stays clipped for save and export.
+        let display = match opts.isolated.filter(|id| doc.node(*id).is_some_and(Node::is_powerclip)) {
+            Some(id) => {
+                let mut display = doc.clone();
+                if let Some(frame) = display.node_mut(id) {
+                    frame.set_clips(false);
+                }
+                std::borrow::Cow::Owned(display)
+            }
+            None => std::borrow::Cow::Borrowed(doc),
+        };
+        self.render_as(&display, width, height, view, opts, false)
     }
 
     /// [`Self::render`], or with `inks` the ink amounts in the working CMYK space instead of
@@ -1186,6 +1199,20 @@ impl Renderer {
     /// What `n` draws inside its transparency group (`knockout`: its children knock each other out).
     fn draw_content(&mut self, ctx: &mut RenderContext, f: &Frame, n: &Node, knockout: bool) {
         match &n.kind {
+            NodeKind::Group { children, clip: false } if n.extras().powerclip.is_some() && f.opts.isolated == Some(n.id) && !f.opts.outline => {
+                // Display projection made by render(): retain the painted frame behind/above
+                // its content, just like the clipped result, while revealing the full artwork.
+                if let Some((frame, contents)) = children.split_first() {
+                    let (fill, stroke) = self.clip_paint_of(frame);
+                    if let Some(fill) = &fill {
+                        self.draw_arc(ctx, f, fill);
+                    }
+                    self.draw_children(ctx, f, contents, knockout);
+                    if let Some(stroke) = &stroke {
+                        self.draw_arc(ctx, f, stroke);
+                    }
+                }
+            }
             NodeKind::Group { children, clip: false } if f.opts.trace_views && !f.opts.outline && n.trace_view() != TraceView::Result => {
                 self.draw_trace_view(ctx, f, children, n.trace_view(), knockout)
             }

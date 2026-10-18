@@ -4387,3 +4387,24 @@ lighting	Light	ライト
 @msg	CDR RIFF container is truncated or contains no drawing records	CDR RIFF コンテナーが途中で切れているか、描画レコードがありません
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR を編集可能なオブジェクトとして読み込みました。フォント、カラープロファイル、未対応の効果は異なる場合があります。.vectorcraft、SVG、PDF の新しいコピーを保存してください。CDR の書き込みには対応していません。
 @msg	CDR import: {e}	CDR の読み込み: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	フレーム内に配置
+	Finish Editing	編集を終了
+	Select Frame	フレームを選択
+	Select Contents	内容を選択
+	Extract Contents	内容を取り出す
+	Lock Contents	内容をロック
+	Fit Contents	内容を調整
+	Center Contents	内容を中央に配置
+	Fit Contents Proportionally	縦横比を保って内容を合わせる
+	Fill Frame Proportionally	縦横比を保ってフレームを埋める
+	Stretch Contents to Frame	フレームに合わせて内容を引き伸ばす
+@msg	select a PowerClip frame or its contents	PowerClipフレームまたはその内容を選択してください
+@msg	no PowerClip contents are being edited	PowerClipの内容は編集中ではありません
+@msg	select a frame; put it above the contents	フレームを選択して内容の手前に配置してください
+@msg	the PowerClip frame has no contents to fit	PowerClipフレームには調整する内容がありません
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	CDRのPowerClip対応には更新済みのVectorCraft CDRコンバーターが必要です
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	CDRのPowerClipフレームを編集可能なクリッピング図形として読み込めませんでした
+@msg	the CorelDRAW document has no page with a size	CorelDRAW 書類にサイズのあるページがありません

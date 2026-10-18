@@ -136,8 +136,9 @@ pub(crate) fn pt_per_px(ppi: Option<(f64, f64)>) -> (f64, f64) {
 fn load(p: &Value, cmd: &str, board: Option<Rect>) -> Result<Loaded> {
     let src = fileio::source(p, cmd)?;
     let name = fileio::file_name(src.name);
-    // An Affinity file is recognised by its signature, whatever its name says.
-    if fileio::TEXT_EXTS.contains(&fileio::extension(src.name).as_str()) && !vectorcraft_affinity::is_affinity(&src.bytes) {
+    // An Affinity or CorelDRAW file is recognised by its signature, whatever its name says.
+    let signed = matches!(fileio::detect(src.name, &src.bytes).map(|f| f.id), Some("affinity" | "cdr"));
+    if fileio::TEXT_EXTS.contains(&fileio::extension(src.name).as_str()) && !signed {
         let text = text::import(&src.bytes, text::TextOptions::parse(p, cmd)?, cmd)?;
         if text.trim().is_empty() {
             return Err(bad(cmd, format!("`{name}` has no text to place")));
@@ -198,15 +199,10 @@ fn load(p: &Value, cmd: &str, board: Option<Rect>) -> Result<Loaded> {
             // Of the open options, only a DXF drawing's apply (the colour mode stays the file's).
             let o = fileio::LoadOptions { dxf: opts.dxf, ..Default::default() };
             let mut l = fileio::load_with(src.name, &src.bytes, &o)?;
-            // An Affinity file whose native document couldn't be read is only its preview: it
-            // must never silently stand in for the art.
+            // An Affinity or CorelDRAW file whose native document couldn't be read is only its
+            // preview: it must never silently stand in for the art.
             if l.preview_only {
-                return Err(bad(
-                    cmd,
-                    format!(
-                        "{name}: only this Affinity file's embedded preview could be read; use File › Open to see it with its warning, or export SVG or PDF from Affinity before placing"
-                    ),
-                ));
+                return Err(bad(cmd, format!("{name}: {}", fileio::PREVIEW_ONLY)));
             }
             // Linked images show their files, found from its folder.
             super::links::resolve(&mut l.doc, src.path, false);
@@ -216,7 +212,19 @@ fn load(p: &Value, cmd: &str, board: Option<Rect>) -> Result<Loaded> {
     doc.drop_edit_modes();
     let board = doc.artboards.first().map(|a| a.rect).filter(|_| anchored);
     let layers = std::mem::take(&mut doc.layers);
-    let (nodes, clip) = if matches!(format.id, "svg" | "svgz" | "dxf" | "cdr") {
+    // A CorelDRAW document read natively with several pages has a layer per page holding that
+    // page's layers; its art, like a one-page document's, may reach past the page onto the desktop.
+    let cdr_pages = format.id == "cdr" && doc.artboards.len() > 1;
+    let (nodes, clip) = if cdr_pages {
+        let n = doc.artboards.len();
+        let (board, layer) =
+            doc.artboards.get(page - 1).zip(layers.get(page - 1)).ok_or_else(|| bad(cmd, format!("page {page}: `{name}` has {n} page(s)")))?;
+        let frame = (crop && p.get("crop").is_some()).then_some(board.rect);
+        let sublayers = layer.children().into_iter().flatten().filter(|l| placeable(l));
+        (art_of(sublayers.flat_map(|l| l.children().into_iter().flatten())), frame)
+    } else if format.id == "cdr" && page > doc.artboards.len().max(1) {
+        return Err(bad(cmd, format!("page {page}: `{name}` has {} page(s)", doc.artboards.len().max(1))));
+    } else if matches!(format.id, "svg" | "svgz" | "dxf" | "cdr") {
         // An SVG with `crop: "crop"` asked for is framed and clipped by its viewBox (its artboard),
         // as a PDF by its page: art drawn on a shared canvas keeps its place and scale (#788). By
         // default, as Illustrator places one, it is its art's bounds.

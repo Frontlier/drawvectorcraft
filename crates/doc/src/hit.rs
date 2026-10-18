@@ -231,6 +231,11 @@ fn clip_contains(clip: &Node, p: Point) -> bool {
 /// hidden, when it can't be edited (`editable_only`), when it is the part of a Shaper group that
 /// isn't shown, or when `p` is outside its reach.
 fn may_hit(parent: &Node, i: usize, c: &Node, p: Point, opt: HitOptions, symbols: &SymbolBoxes, editable_only: bool) -> bool {
+    // PowerClip Edit Contents leaves the frame visible but edits only retained contents,
+    // including art outside the frame. The frame has its own Select Frame command.
+    if editable_only && parent.is_powerclip() && opt.scope == Some(parent.id) && i == 0 {
+        return false;
+    }
     let source_isolated = |n: &Node| n.children().and_then(|children| children.first()).is_some_and(|source| Some(source.id) == opt.scope);
     if parent.extras().shaper.is_some() && (i == 0) != source_isolated(parent) {
         return false;
@@ -257,6 +262,7 @@ fn hit_children(
     let children = parent.children()?;
     // A clip group (or a layer with a clipping mask) only hits inside its clipping path.
     if parent.clips()
+        && !(editable_only && parent.is_powerclip() && opt.scope == Some(parent.id))
         && let Some(clip) = children.first()
         && !clip_contains(clip, p)
     {

@@ -57,6 +57,7 @@ pub mod pdfcmds;
 pub mod perspgrid;
 pub(crate) mod place;
 pub mod plugin;
+pub mod powerclip;
 pub mod prefscmds;
 pub mod print;
 pub(crate) mod printadvanced;
@@ -203,6 +204,7 @@ pub fn command_specs() -> &'static [CommandSpec] {
         v.extend(fileio::specs());
         v.extend(create::specs());
         v.extend(object::specs());
+        v.extend(powerclip::specs());
         v.extend(path::specs());
         v.extend(select::specs());
         v.extend(wand::specs());

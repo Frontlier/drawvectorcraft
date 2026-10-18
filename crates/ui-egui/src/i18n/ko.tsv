@@ -4357,3 +4357,24 @@ lighting	Light	광원
 @msg	CDR RIFF container is truncated or contains no drawing records	CDR RIFF 컨테이너가 잘렸거나 그리기 레코드가 없습니다
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR을 편집 가능한 개체로 가져왔습니다. 글꼴, 색상 프로필 및 지원되지 않는 효과는 다를 수 있습니다. 새 .vectorcraft, SVG 또는 PDF 복사본을 저장하세요. CDR 쓰기는 지원되지 않습니다.
 @msg	CDR import: {e}	CDR 가져오기: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	프레임 안에 배치
+	Finish Editing	편집 완료
+	Select Frame	프레임 선택
+	Select Contents	내용 선택
+	Extract Contents	내용 추출
+	Lock Contents	내용 잠금
+	Fit Contents	내용 맞추기
+	Center Contents	내용 가운데 맞춤
+	Fit Contents Proportionally	비율을 유지하여 내용 맞추기
+	Fill Frame Proportionally	비율을 유지하여 프레임 채우기
+	Stretch Contents to Frame	프레임에 맞게 내용 늘이기
+@msg	select a PowerClip frame or its contents	PowerClip 프레임이나 내용을 선택하세요
+@msg	no PowerClip contents are being edited	편집 중인 PowerClip 내용이 없습니다
+@msg	select a frame; put it above the contents	프레임을 선택하여 내용 위에 배치하세요
+@msg	the PowerClip frame has no contents to fit	PowerClip 프레임에 맞출 내용이 없습니다
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	CDR PowerClip 지원에는 업데이트된 VectorCraft CDR 변환기가 필요합니다
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	CDR PowerClip 프레임을 편집 가능한 클리핑 도형으로 가져올 수 없습니다
+@msg	the CorelDRAW document has no page with a size	CorelDRAW 문서에 크기가 있는 페이지가 없습니다

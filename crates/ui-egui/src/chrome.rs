@@ -453,6 +453,7 @@ pub fn doc_tabs(app: &mut VectorcraftApp, ui: &mut Ui) {
             st.doc.ancestry(iso).unwrap_or_default().iter().filter_map(|id| st.doc.node(*id)).map(|n| n.display_name()).collect();
         // Pattern editing mode: the pattern's name, and Save a Copy / Done / Cancel at the right.
         let pattern_edit = st.doc.pattern_edit.as_ref().map(|e| e.pattern.clone());
+        let powerclip_edit = vectorcraft_engine::cmd::powerclip::editing(st).is_some();
         if let Some(pn) = &pattern_edit {
             crumbs.push(pn.clone());
         }
@@ -469,6 +470,18 @@ pub fn doc_tabs(app: &mut VectorcraftApp, ui: &mut Ui) {
             t.text,
         );
         let mut pattern_cmd = None;
+        if powerclip_edit {
+            let label = tl!("Finish Editing");
+            let w = 24.0 + 7.0 * label.len() as f32;
+            let r = egui::Rect::from_min_max(egui::pos2(bar.right() - w - 6.0, bar.top() + 3.0), egui::pos2(bar.right() - 6.0, bar.bottom() - 3.0));
+            let response = ui.interact(r, ui.id().with("powerclip-done"), Sense::click());
+            ui.painter().rect_filled(r, 3.0, if response.hovered() { t.hover } else { t.panel });
+            ui.painter().rect_stroke(r, 3.0, Stroke::new(1.0, t.button_border), egui::StrokeKind::Inside);
+            ui.painter().text(r.center(), egui::Align2::CENTER_CENTER, label, egui::FontId::proportional(12.0), t.text);
+            if response.clicked() {
+                pattern_cmd = Some("object.powerClip.finish");
+            }
+        }
         if pattern_edit.is_some() {
             let mut x = bar.right() - 6.0;
             for (label, cmd) in [("Cancel", "object.pattern.cancel"), ("Done", "object.pattern.done"), ("Save a Copy", "object.pattern.saveCopy")] {
@@ -486,6 +499,9 @@ pub fn doc_tabs(app: &mut VectorcraftApp, ui: &mut Ui) {
             }
         }
         if bresp.clicked() {
+            if powerclip_edit {
+                pattern_cmd = Some("object.powerClip.finish");
+            }
             pattern_cmd = pattern_cmd.or(pattern_edit.as_ref().map(|_| "object.pattern.done"));
             if pattern_cmd.is_none() {
                 app.run("object.exitIsolation", json!({})).ok();

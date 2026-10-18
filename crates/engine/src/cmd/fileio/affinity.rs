@@ -523,7 +523,8 @@ impl Builder {
     }
 }
 
-fn font_style(weight: i64, italic: bool) -> String {
+/// The style name of a CSS `weight` (and italic), for fonts named by family alone (CorelDRAW too).
+pub(super) fn font_style(weight: i64, italic: bool) -> String {
     let w = match weight {
         ..=150 => "Thin",
         151..=250 => "ExtraLight",

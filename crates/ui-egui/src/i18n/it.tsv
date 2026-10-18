@@ -4393,3 +4393,24 @@ lighting	Light	Luce
 @msg	CDR RIFF container is truncated or contains no drawing records	Il contenitore CDR RIFF è troncato o non contiene record di disegno
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	Il CDR è stato importato come oggetti modificabili. Font, profili colore ed effetti non supportati possono differire. Salvare una nuova copia .vectorcraft, SVG o PDF; la scrittura CDR non è supportata.
 @msg	CDR import: {e}	Importazione CDR: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	Inserisci nella cornice
+	Finish Editing	Termina modifica
+	Select Frame	Seleziona cornice
+	Select Contents	Seleziona contenuto
+	Extract Contents	Estrai contenuto
+	Lock Contents	Blocca contenuto
+	Fit Contents	Adatta contenuto
+	Center Contents	Centra contenuto
+	Fit Contents Proportionally	Adatta contenuto proporzionalmente
+	Fill Frame Proportionally	Riempi cornice proporzionalmente
+	Stretch Contents to Frame	Estendi contenuto alla cornice
+@msg	select a PowerClip frame or its contents	Seleziona una cornice PowerClip o il suo contenuto
+@msg	no PowerClip contents are being edited	Nessun contenuto PowerClip è in modifica
+@msg	select a frame; put it above the contents	Seleziona una cornice e posizionala sopra il contenuto
+@msg	the PowerClip frame has no contents to fit	La cornice PowerClip non contiene elementi da adattare
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	Il supporto PowerClip nei CDR richiede il convertitore CDR VectorCraft aggiornato
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	Impossibile importare la cornice PowerClip del CDR come forma di ritaglio modificabile
+@msg	the CorelDRAW document has no page with a size	il documento CorelDRAW non ha pagine con una dimensione

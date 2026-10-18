@@ -1335,6 +1335,10 @@ impl Session {
         // document. The command validates those targets before making any edit.
         let enabled = if id == "edit.clear" && params.get("ids").is_some() {
             cmd::has_doc(self)
+        } else if id.starts_with("object.powerClip.") && (params.get("id").is_some() || params.get("frame").is_some()) {
+            // PowerClip commands validate explicit frames/contents themselves; an automation
+            // target does not require an unrelated UI selection to enable the command.
+            cmd::has_doc(self)
         } else if let Some(ids) = given_ids(spec.params, params) {
             // Objects given as `ids` stand in for the selection: the command is enabled as it is
             // with them selected (#1575).
@@ -1923,6 +1927,8 @@ mod tests_place;
 mod tests_placed_document;
 #[cfg(test)]
 mod tests_plugins;
+#[cfg(test)]
+mod tests_powerclip;
 #[cfg(test)]
 mod tests_prefs;
 #[cfg(test)]

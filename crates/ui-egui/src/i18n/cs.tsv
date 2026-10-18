@@ -4821,3 +4821,24 @@ mark-style	Japanese	Japonské
 @msg	CDR RIFF container is truncated or contains no drawing records	Kontejner CDR RIFF je zkrácený nebo neobsahuje záznamy kresby
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR byl importován jako upravitelné objekty. Písma, barevné profily a nepodporované efekty se mohou lišit. Uložte novou kopii ve formátu .vectorcraft, SVG nebo PDF; zápis CDR není podporován.
 @msg	CDR import: {e}	Import CDR: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	Vložit do rámečku
+	Finish Editing	Dokončit úpravy
+	Select Frame	Vybrat rámeček
+	Select Contents	Vybrat obsah
+	Extract Contents	Vyjmout obsah
+	Lock Contents	Zamknout obsah
+	Fit Contents	Přizpůsobit obsah
+	Center Contents	Vystředit obsah
+	Fit Contents Proportionally	Proporčně přizpůsobit obsah
+	Fill Frame Proportionally	Proporčně vyplnit rámeček
+	Stretch Contents to Frame	Roztáhnout obsah do rámečku
+@msg	select a PowerClip frame or its contents	Vyberte rámeček PowerClip nebo jeho obsah
+@msg	no PowerClip contents are being edited	Právě se neupravuje žádný obsah PowerClip
+@msg	select a frame; put it above the contents	Vyberte rámeček a umístěte jej nad obsah
+@msg	the PowerClip frame has no contents to fit	Rámeček PowerClip neobsahuje nic k přizpůsobení
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	Podpora PowerClip v CDR vyžaduje aktualizovaný převodník CDR VectorCraft
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	Rámeček PowerClip z CDR se nepodařilo importovat jako upravitelný ořezový tvar
+@msg	the CorelDRAW document has no page with a size	dokument CorelDRAW nemá žádnou stránku s velikostí

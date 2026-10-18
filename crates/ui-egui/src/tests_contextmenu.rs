@@ -177,6 +177,40 @@ fn the_menu_follows_the_selection() {
     assert!(items.windows(2).all(|w| !matches!(w, [Item::Sep, Item::Sep])));
 }
 
+#[test]
+fn powerclip_context_and_properties_offer_edit_fit_lock_extract_and_finish() {
+    let mut app = app();
+    let art = rect(&mut app, 20.0, 20.0);
+    let frame = rect(&mut app, 50.0, 50.0);
+    app.run("object.powerClip.make", json!({"frame":frame.0,"ids":[art.0]})).unwrap();
+    let entries = menus::context_entries(&app);
+    for command in
+        ["object.powerClip.edit", "object.powerClip.selectFrame", "object.powerClip.extract", "object.powerClip.lockContents", "object.powerClip.fit"]
+    {
+        assert!(entries.iter().any(|e| e.command.as_deref() == Some(command) && e.enabled && e.path == ["PowerClip"]), "{command}");
+    }
+    assert_eq!(menus::checked(&app, "object.powerClip.lockContents", &json!({})), Some(true));
+    app.run("object.powerClip.edit", json!({})).unwrap();
+    assert!(menus::context_entries(&app).iter().any(|e| e.command.as_deref() == Some("object.powerClip.finish") && e.enabled));
+    let ctx = egui::Context::default();
+    let mut out = ctx.run_ui(Default::default(), |ui| crate::panels::properties::show(&mut app, ui));
+    out.textures_delta.clear();
+    fn text(shape: &egui::Shape, values: &mut Vec<String>) {
+        match shape {
+            egui::Shape::Text(t) => values.push(t.galley.text().to_string()),
+            egui::Shape::Vec(shapes) => shapes.iter().for_each(|s| text(s, values)),
+            _ => {}
+        }
+    }
+    let mut shown = vec![];
+    out.shapes.iter().for_each(|s| text(&s.shape, &mut shown));
+    for label in
+        ["PowerClip", "Finish Editing", "Select Frame", "Extract Contents", "Lock Contents", "Center Contents", "Fit Contents Proportionally"]
+    {
+        assert!(shown.iter().any(|s| s == label), "missing {label} in {shown:?}");
+    }
+}
+
 /// Every label the context menu can show is a menu string, so complete catalogs must translate it.
 #[test]
 fn every_context_label_is_a_menu_string() {

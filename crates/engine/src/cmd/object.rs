@@ -276,7 +276,7 @@ pub(crate) fn transforms_objects(p: &Value) -> bool {
 /// `xf` on `n` with Transform Objects (`objects`, see [`transforms_objects`]) on or off.
 pub(crate) fn transform_node(n: &mut Node, xf: Affine, sc: Scaling, objects: bool) {
     if objects {
-        n.transform(xf, sc);
+        super::powerclip::transform_object(n, xf, sc);
     } else if sc.patterns {
         vectorcraft_doc::pattern::transform_patterns_only(n, xf);
     }
@@ -944,6 +944,9 @@ fn isolate(s: &mut Session, p: &Value) -> Result<Value> {
 }
 
 fn exit_isolation(s: &mut Session, _: &Value) -> Result<Value> {
+    if s.active().and_then(super::powerclip::editing).is_some() {
+        return super::powerclip::finish(s, &json!({}));
+    }
     let st = s.doc_mut()?;
     if let Some(i) = st.isolation.take() {
         super::distortcmds::finish_edit_text(st, i);
@@ -1131,7 +1134,7 @@ fn apply_moves(s: &mut Session, label: &str, p: &Value, ids: &[NodeId], moves: &
     s.edit(label, |d, _| {
         for (id, dv) in moves {
             if let Some(n) = d.node_mut(*id) {
-                n.transform(Affine::translate(*dv), sc);
+                super::powerclip::transform_object(n, Affine::translate(*dv), sc);
             }
         }
         Ok(())

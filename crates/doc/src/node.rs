@@ -531,6 +531,9 @@ pub struct Node {
 /// them stay small ([`Node::extras`]).
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct NodeExtras {
+    /// A Corel-style editable frame. Geometry uses the existing first-child clipping group;
+    /// these options affect editing only and never flatten or crop its retained contents.
+    pub powerclip: Option<PowerClipSpec>,
     /// Opacity mask (Transparency panel). Its art lives here, outside the layer tree.
     pub mask: Option<Box<OpacityMask>>,
     /// Image Trace object: `{preset, params, view?}` it was traced with (the Image Trace panel shows
@@ -559,6 +562,7 @@ pub struct NodeExtras {
 
 /// No extras: what [`Node::extras`] gives for a node without any.
 static NO_EXTRAS: NodeExtras = NodeExtras {
+    powerclip: None,
     mask: None,
     trace: None,
     wrap: None,
@@ -699,6 +703,7 @@ impl Serialize for Node {
             e.slice.is_none(),
             is_default(&self.bbox_angle),
             e.perspective.is_none(),
+            e.powerclip.is_none(),
         ];
         let mut st = s.serialize_struct("Node", skips.iter().filter(|s| !**s).count())?;
         let mut skip = skips.into_iter();
@@ -733,6 +738,7 @@ impl Serialize for Node {
         field!("slice", &e.slice);
         field!("bbox_angle", &self.bbox_angle);
         field!("perspective", &e.perspective);
+        field!("powerclip", &e.powerclip);
         st.end()
     }
 }
@@ -784,11 +790,14 @@ struct NodeWire {
     bbox_angle: f64,
     #[serde(default)]
     perspective: Option<Box<crate::PerspectiveAttachment>>,
+    #[serde(default)]
+    powerclip: Option<PowerClipSpec>,
 }
 
 impl From<NodeWire> for Node {
     fn from(w: NodeWire) -> Self {
         let extras = NodeExtras {
+            powerclip: w.powerclip,
             mask: w.mask,
             trace: w.trace,
             wrap: w.wrap,
@@ -815,6 +824,20 @@ impl From<NodeWire> for Node {
             bbox_angle: w.bbox_angle,
             extras: Extras((extras != NO_EXTRAS).then(|| Box::new(extras))),
         }
+    }
+}
+
+/// Editing options for a PowerClip frame, separate from its ordinary clipping geometry.
+/// Imported files that do not specify the option keep their contents locked to the frame.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct PowerClipSpec {
+    #[serde(default = "yes")]
+    pub contents_locked: bool,
+}
+
+impl Default for PowerClipSpec {
+    fn default() -> Self {
+        Self { contents_locked: true }
     }
 }
 
@@ -949,6 +972,7 @@ impl Node {
     pub fn kind_label(&self) -> &'static str {
         match &self.kind {
             NodeKind::Layer { .. } => "Layer",
+            NodeKind::Group { clip: true, .. } if self.is_powerclip() => "PowerClip",
             NodeKind::Group { clip: true, .. } => "Clip Group",
             NodeKind::Group { .. } => "Group",
             NodeKind::Path { live: Some(l), .. } => l.label(),
@@ -1552,6 +1576,11 @@ impl Node {
     /// Whether this is a clip group or a layer with a clipping mask: its first child clips the rest.
     pub fn clips(&self) -> bool {
         matches!(self.kind, NodeKind::Group { clip: true, .. } | NodeKind::Layer { clip: true, .. })
+    }
+
+    /// A PowerClip is a clipping group with retained editable frame/contents options.
+    pub fn is_powerclip(&self) -> bool {
+        matches!(self.kind, NodeKind::Group { clip: true, .. }) && self.extras().powerclip.is_some()
     }
 
     /// Make this group or layer clip its children by its first child, or stop it.

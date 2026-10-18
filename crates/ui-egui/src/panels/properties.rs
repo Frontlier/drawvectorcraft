@@ -34,6 +34,10 @@ pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
         artboard_sections(app, ui);
         return;
     }
+    if vectorcraft_engine::cmd::powerclip::selected(&app.session).is_some() {
+        powerclip_section(app, ui);
+        divider(ui);
+    }
     if first.is_none() {
         document_sections(app, ui);
         return;
@@ -103,6 +107,9 @@ pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
         actions.push((tl!("Group"), "object.group"));
         actions.push((tl!("Make Clipping Mask"), "object.clippingMask.make"));
     }
+    if crate::menus::enabled(app, "object.powerClip.make") && vectorcraft_engine::cmd::powerclip::selected(&app.session).is_none() {
+        actions.push((tl!("Place Inside Frame"), "object.powerClip.make"));
+    }
     if is_group {
         actions.push((tl!("Ungroup"), "object.ungroup"));
         actions.push((tl!("Isolate Group"), "object.isolate"));
@@ -132,6 +139,57 @@ pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
             }
         });
     }
+}
+
+fn powerclip_section(app: &mut VectorcraftApp, ui: &mut Ui) {
+    let Some(id) = vectorcraft_engine::cmd::powerclip::selected(&app.session) else { return };
+    let Some(st) = app.session.active() else { return };
+    let Some(node) = st.doc.node(id) else { return };
+    let mut locked = node.extras().powerclip.unwrap_or_default().contents_locked;
+    let has_contents = node.children().is_some_and(|c| c.len() > 1);
+    let editing = vectorcraft_engine::cmd::powerclip::editing(st) == Some(id);
+    section_header(ui, tl!("PowerClip"));
+    let w = (ui.available_width() - 6.0) / 2.0;
+    for row in [
+        [
+            (
+                if editing { tl!("Finish Editing") } else { tl!("Edit Contents") },
+                if editing { "object.powerClip.finish" } else { "object.powerClip.edit" },
+            ),
+            (tl!("Select Frame"), "object.powerClip.selectFrame"),
+        ],
+        [(tl!("Select Contents"), "object.powerClip.selectContents"), (tl!("Extract Contents"), "object.powerClip.extract")],
+    ] {
+        ui.horizontal(|ui| {
+            for (label, command) in row {
+                if widgets::flat_button(ui, label, w).clicked()
+                    && let Err(error) = app.run(command, if command == "object.powerClip.finish" { json!({}) } else { json!({"id":id.0}) })
+                {
+                    app.status(error);
+                }
+            }
+        });
+    }
+    if ui.checkbox(&mut locked, tl!("Lock Contents")).changed()
+        && let Err(error) = app.run("object.powerClip.lockContents", json!({"id":id.0,"locked":locked}))
+    {
+        app.status(error);
+    }
+    ui.add_enabled_ui(has_contents, |ui| {
+        let width = ui.available_width();
+        for (label, mode) in [
+            (tl!("Center Contents"), "center"),
+            (tl!("Fit Contents Proportionally"), "fit"),
+            (tl!("Fill Frame Proportionally"), "fill"),
+            (tl!("Stretch Contents to Frame"), "stretch"),
+        ] {
+            if widgets::flat_button(ui, label, width).clicked()
+                && let Err(error) = app.run("object.powerClip.fit", json!({"id":id.0,"mode":mode}))
+            {
+                app.status(error);
+            }
+        }
+    });
 }
 
 /// The one selected image: its file (or Embedded), colour mode and resolution, and the Links

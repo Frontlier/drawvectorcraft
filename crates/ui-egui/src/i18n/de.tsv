@@ -4348,3 +4348,24 @@ theme	Appearance	Erscheinungsbild
 @msg	CDR RIFF container is truncated or contains no drawing records	Der CDR-RIFF-Container ist abgeschnitten oder enthält keine Zeichnungsdatensätze
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR wurde als bearbeitbare Objekte importiert. Schriftarten, Farbprofile und nicht unterstützte Effekte können abweichen. Speichern Sie eine neue Kopie als .vectorcraft, SVG oder PDF; das Schreiben von CDR wird nicht unterstützt.
 @msg	CDR import: {e}	CDR-Import: {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	In Rahmen platzieren
+	Finish Editing	Bearbeitung abschließen
+	Select Frame	Rahmen auswählen
+	Select Contents	Inhalt auswählen
+	Extract Contents	Inhalt herauslösen
+	Lock Contents	Inhalt sperren
+	Fit Contents	Inhalt einpassen
+	Center Contents	Inhalt zentrieren
+	Fit Contents Proportionally	Inhalt proportional einpassen
+	Fill Frame Proportionally	Rahmen proportional füllen
+	Stretch Contents to Frame	Inhalt auf Rahmen dehnen
+@msg	select a PowerClip frame or its contents	Wählen Sie einen PowerClip-Rahmen oder seinen Inhalt aus
+@msg	no PowerClip contents are being edited	Es wird kein PowerClip-Inhalt bearbeitet
+@msg	select a frame; put it above the contents	Wählen Sie einen Rahmen und legen Sie ihn über den Inhalt
+@msg	the PowerClip frame has no contents to fit	Der PowerClip-Rahmen enthält keinen Inhalt zum Einpassen
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	PowerClip-Unterstützung für CDR erfordert den aktualisierten VectorCraft-CDR-Konverter
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	Der CDR-PowerClip-Rahmen konnte nicht als bearbeitbare Beschnittform importiert werden
+@msg	the CorelDRAW document has no page with a size	das CorelDRAW-Dokument hat keine Seite mit einer Größe

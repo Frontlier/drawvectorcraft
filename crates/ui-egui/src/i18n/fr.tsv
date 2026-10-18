@@ -4821,3 +4821,24 @@ theme	Appearance	Apparence
 @msg	CDR RIFF container is truncated or contains no drawing records	Le conteneur CDR RIFF est tronqué ou ne contient aucun enregistrement de dessin
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	Le CDR a été importé sous forme d’objets modifiables. Les polices, les profils colorimétriques et les effets non pris en charge peuvent différer. Enregistrez une nouvelle copie en .vectorcraft, SVG ou PDF ; l’écriture CDR n’est pas prise en charge.
 @msg	CDR import: {e}	Importation CDR : {e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	Placer dans le cadre
+	Finish Editing	Terminer la modification
+	Select Frame	Sélectionner le cadre
+	Select Contents	Sélectionner le contenu
+	Extract Contents	Extraire le contenu
+	Lock Contents	Verrouiller le contenu
+	Fit Contents	Ajuster le contenu
+	Center Contents	Centrer le contenu
+	Fit Contents Proportionally	Ajuster proportionnellement le contenu
+	Fill Frame Proportionally	Remplir proportionnellement le cadre
+	Stretch Contents to Frame	Étirer le contenu au cadre
+@msg	select a PowerClip frame or its contents	Sélectionnez un cadre PowerClip ou son contenu
+@msg	no PowerClip contents are being edited	Aucun contenu PowerClip n’est en cours de modification
+@msg	select a frame; put it above the contents	Sélectionnez un cadre et placez-le au-dessus du contenu
+@msg	the PowerClip frame has no contents to fit	Le cadre PowerClip ne contient rien à ajuster
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	La prise en charge de PowerClip dans CDR nécessite le convertisseur CDR VectorCraft mis à jour
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	Le cadre PowerClip du CDR n’a pas pu être importé comme forme de découpe modifiable
+@msg	the CorelDRAW document has no page with a size	le document CorelDRAW n’a aucune page avec une taille

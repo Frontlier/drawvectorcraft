@@ -3754,3 +3754,23 @@ lighting	Light	光源
 @msg	CDR RIFF container is truncated or contains no drawing records	CDR RIFF 容器已截斷或不含繪圖記錄
 @msg	CDR imported as editable objects. Fonts, colour profiles and unsupported effects may differ. Save a new .vectorcraft, SVG or PDF copy; writing CDR is not supported.	CDR 已匯入為可編輯物件。字型、色彩描述檔與不支援的效果可能有所差異。請儲存新的 .vectorcraft、SVG 或 PDF 副本；不支援寫入 CDR。
 @msg	CDR import: {e}	CDR 匯入：{e}
+
+# PowerClip: editable frames and CDR compatibility
+	PowerClip	PowerClip
+	Place Inside Frame	置入框架內
+	Finish Editing	完成編輯
+	Select Frame	選取框架
+	Select Contents	選取內容
+	Extract Contents	擷取內容
+	Lock Contents	鎖定內容
+	Fit Contents	調整內容
+	Center Contents	置中內容
+	Fit Contents Proportionally	按比例符合內容
+	Fill Frame Proportionally	按比例填滿框架
+	Stretch Contents to Frame	延展內容至框架
+@msg	select a PowerClip frame or its contents	請選取 PowerClip 框架或其內容
+@msg	no PowerClip contents are being edited	目前未編輯 PowerClip 內容
+@msg	select a frame; put it above the contents	請選取框架並將其置於內容上方
+@msg	the PowerClip frame has no contents to fit	PowerClip 框架內沒有可調整的內容
+@msg	CDR PowerClip support requires the updated VectorCraft CDR converter	CDR PowerClip 支援需要更新後的 VectorCraft CDR 轉換器
+@msg	CDR PowerClip frame could not be imported as an editable clipping shape	無法將 CDR PowerClip 框架匯入為可編輯的剪裁形狀
